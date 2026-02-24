@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFighter - Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Fit<span>Fighter</span></h1>
+            <p>Seu Marcador Fitness</p>
+        </div>
+        <form action="cadastrarLogin.php" method="POST" autocomplete="off">
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="email" name="nome" placeholder="Nome:" required autocomplete="name">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required autocomplete="email">
+            </div>
+            
+            <div>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required autocomplete="new-password">
+            </div>
+            <input type="submit" value="Cadastrar">
+        </form>
+        <div class="login-footer">
+            <p>Deseja entrar? <a href="index.html">Entre aqui</a></p>
+        </div>
+    </div>
+    <script src="cadastrarUsuario.js"></script>
+</body>
+
+</html>

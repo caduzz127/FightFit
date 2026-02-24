@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFighter — Página Principal</title>
+    <link rel="stylesheet" href="paginaPrincipal.css">
+    <link rel="stylesheet" href="header.css">
+    
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-text"><a href="telaPrincipal.html">FitFighter</a></div>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="minhaArea.html">MINHA ÁREA</a></li>
+                <li><a href="telaGrupo.html">GRUPOS</a></li>
+                <li><a href="telaSobre.html">SOBRE NÓS</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="hamburger" id="hamburger" aria-label="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="menu-dropdown" id="menuDropdown">
+                    <ul>
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#">Configurações</a></li>
+                        <li><a href="#">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container main-section">
+		<div class="escolha">
+			<h1>Escolha sua experiência</h1>
+			<div class="user-greeting">Registre seus treinos, metas e acompanhe sua evolução.</div>
+		</div>
+
+		
+
+        <section class="nav-principal">
+            <article class="nav-individual">
+                <h2>Individual</h2>
+                <p>Registre sua lista de exercícios, suas metas de carga, seus PRs e quantas repetições.</p>
+                <div class="card-image">
+                    <img src="soloImage.png" alt="" width="260px">
+                </div>
+                <button class="btn-primary" onclick="abrirTelaIndividual()">Clique aqui</button>
+            </article>
+
+            <article class="nav-grupo">
+                <h2>Grupo</h2>
+                <p>Registre uma lista de exercícios com os seus amigos. Crie uma competição saudável!</p>
+                <div class="card-image">
+                    <img src="grupo.png" alt="" width="260px">
+                </div>
+                <button class="btn-primary" onclick="abrirTelaGrupo()">Clique aqui</button>
+            </article>
+        </section>
+    </main>
+
+    <script src="menu.js"></script>
+    <script>
+        function abrirTelaGrupo() {
+			window.location.href = 'telaGrupo.html';
+		}
+        function abrirTelaIndividual() {
+        window.location.href = 'formIndividual.html';
+        }
+    </script>
+</body>
+</html>

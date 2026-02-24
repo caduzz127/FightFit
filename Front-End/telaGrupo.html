@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FitFighter — Grupos</title>
+	<link rel="stylesheet" href="header.css">
+	<link rel="stylesheet" href="telaGrupo.css">
+</head>
+<body>
+	<nav class="navbar">
+		<div class="nav-container">
+			<div class="logo">
+				<div class="logo-text"><a href="telaPrincipal.html">FitFighter</a></div>
+			</div>
+
+			<ul class="nav-menu">
+				<li><a href="minhaArea.html">MINHA ÁREA</a></li>
+				<li><a href="telaGrupo.html">GRUPOS</a></li>
+				<li><a href="telaSobre.html">SOBRE NÓS</a></li>
+			</ul>
+
+			<div class="nav-actions">
+				<button class="hamburger" id="hamburger" aria-label="menu" aria-expanded="false">
+					<span></span><span></span><span></span>
+				</button>
+				<div class="menu-dropdown" id="menuDropdown">
+					<ul>
+						<li><a href="#">Perfil</a></li>
+						<li><a href="#">Configurações</a></li>
+						<li><a href="#">Sair</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<main class="container">
+		<header class="header">
+			<h1>Grupos</h1>
+			<p>Crie e participe de grupos para treinar com amigos e competir de forma saudável.</p>
+		</header>
+
+		<section class="groups-grid" aria-live="polite">
+			<article class="group-card">
+				<h3>Participar de um grupo</h3>
+				<p>Procure pelo nome do grupo e entre para competir com seus amigos.</p>
+				<input type="text" placeholder="Digite o nome do grupo" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);margin-top:10px;background:transparent;color:#fff">
+				<input type="text" placeholder="Digite a senha do grupo" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);margin-top:10px;background:transparent;color:#fff">
+				<button class="btn-primary" style="margin-top:53px;">Entrar</button>
+			</article>
+
+			<article class="group-card">
+				<h3>Criar um grupo</h3>
+				<p>Configure um grupo, convide amigos e comece a competição.</p>
+
+				<button class="btn-primary" style="margin-top:20px;" onclick="abrirForm()">Criar Grupo</button>
+			</article>
+		</section>
+	</main>
+
+	<script>
+		(function(){
+			const hamburger = document.getElementById('hamburger');
+			const dropdown = document.getElementById('menuDropdown');
+			if (!hamburger || !dropdown) return;
+
+			hamburger.setAttribute('aria-expanded','false');
+			dropdown.style.display = 'none';
+
+			function openMenu(){
+				hamburger.classList.add('active');
+				dropdown.classList.add('active');
+				dropdown.style.display = 'block';
+				hamburger.setAttribute('aria-expanded','true');
+			}
+			function closeMenu(){
+				hamburger.classList.remove('active');
+				dropdown.classList.remove('active');
+				dropdown.style.display = 'none';
+				hamburger.setAttribute('aria-expanded','false');
+			}
+
+			hamburger.addEventListener('click', (e)=>{
+				e.stopPropagation();
+				if (hamburger.classList.contains('active')) closeMenu(); else openMenu();
+			});
+
+			document.addEventListener('click', (e)=>{
+				if (!hamburger.contains(e.target) && !dropdown.contains(e.target)) closeMenu();
+			});
+
+			document.addEventListener('keydown', (e)=>{
+				if (e.key === 'Escape') closeMenu();
+			});
+
+			window.addEventListener('resize', ()=>{
+				if (window.innerWidth > 900) closeMenu();
+			});
+		})();
+
+		function abrirForm(){
+			window.location.href = 'formGrupo.html';
+		}
+	</script>
+</body>
+</html>

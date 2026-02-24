@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="formIndividual.css">
+    <title>Criar Treino Individual — FitFighter</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-text"><a href="telaPrincipal.html">FitFighter</a></div>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="minhaArea.html">MINHA ÁREA</a></li>
+                <li><a href="telaGrupo.html">GRUPOS</a></li>
+                <li><a href="telaSobre.html">SOBRE NÓS</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="hamburger" id="hamburger" aria-label="menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="menu-dropdown" id="menuDropdown">
+                    <ul>
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#">Configurações</a></li>
+                        <li><a href="#">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="workout-card">
+            <div class="card-top">
+                <h3>Criar Treino Individual</h3>
+                <div class="subtle muted">Preencha o nome do treino e adicione exercícios</div>
+            </div>
+
+            <form id="criarTreinoForm" autocomplete="off">
+                <div>
+                    <label for="nomeTreino">Nome do treino</label>
+                    <input type="text" id="nomeTreino" name="nome" placeholder="Nome do treino" required
+                        autocomplete="off">
+                </div>
+
+                <hr style="border:none;height:1px;background:rgba(255,255,255,0.04);margin:12px 0">
+
+                <div>
+                    <label>Adicionar Exercício</label>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                        <input type="text" id="exNome" placeholder="Nome do exercício" style="flex:1">
+                        <input type="number" id="exSeries" placeholder="Séries" style="width:100px">
+                        <input type="number" id="exReps" placeholder="Repetições" style="width:100px">
+                        <input type="number" id="exCarga" placeholder="Carga (kg)" style="width:100px">
+                    </div>
+                </div>
+
+                <div id="listaExercicios" style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+                    <!-- Exercícios adicionados aparecem aqui -->
+                </div>
+
+                <input type="hidden" id="exerciciosData" name="exercicios">
+
+                <button type="submit" class="btn-primary">Criar Treino</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <script>
+        (function () {
+            const btnAdd = document.getElementById('btnAddEx');
+            const lista = document.getElementById('listaExercicios');
+            const exNome = document.getElementById('exNome');
+            const exSeries = document.getElementById('exSeries');
+            const exReps = document.getElementById('exReps');
+            const exCarga = document.getElementById('exCarga');
+            const form = document.getElementById('criarTreinoForm');
+
+            const exercicios = [];
+
+            // ==========================
+            // ADICIONAR EXERCÍCIO NA LISTA
+            // ==========================
+            btnAdd.addEventListener('click', () => {
+                const nome = exNome.value.trim();
+                const series = exSeries.value.trim();
+                const reps = exReps.value.trim();
+                const carga = exCarga.value.trim();
+
+                if (!nome || !series || !reps || !carga) {
+                    return alert('Preencha nome, séries, repetições e carga do exercício');
+                }
+
+                exercicios.push({
+                    nome,
+                    series: Number(series),
+                    repeticoes: Number(reps),
+                    carga: Number(carga)
+                });
+
+                exNome.value = '';
+                exSeries.value = '';
+                exReps.value = '';
+                exCarga.value = '';
+
+                renderList();
+            });
+
+            // ==========================
+            // REMOVER EXERCÍCIO DA LISTA
+            // ==========================
+            lista.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+
+                const idx = Number(btn.getAttribute('data-idx'));
+                if (!Number.isNaN(idx)) {
+                    exercicios.splice(idx, 1);
+                    renderList();
+                }
+            });
+
+            // ==========================
+            // SUBMIT DO FORMULÁRIO
+            // ==========================
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const nomeTreino = document.getElementById('nomeTreino').value.trim();
+                if (!nomeTreino) return alert('Preencha o nome do treino');
+
+                // 1️⃣ Recuperar email do usuário logado
+                const emailUsuario = sessionStorage.getItem('usuarioEmail');
+                if (!emailUsuario) {
+                    return alert('Usuário não encontrado. Faça login novamente.');
+                }
+
+                try {
+                    // 2️⃣ Criar o treino
+                    const treinoRes = await fetch('http://localhost:8080/fightFit/registrarTreino', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            nome: nomeTreino,
+                            email: emailUsuario
+                        })
+                    });
+
+                    if (!treinoRes.ok) {
+                        const msg = await treinoRes.text();
+                        return alert('Erro ao criar treino: ' + msg);
+                    }
+
+                    // 3️⃣ Capturar ID do treino retornado
+                    const treinoData = await treinoRes.json();
+                    const treinoId = treinoData.id;
+
+                    if (!treinoId) {
+                        return alert('Erro: ID do treino não retornado.');
+                    }
+
+                    // opcional: salvar treino criado
+                    sessionStorage.setItem('ultimoTreinoId', treinoId);
+
+                    // 4️⃣ Criar exercícios vinculados ao treino
+                    const erros = [];
+
+                    for (const ex of exercicios) {
+                        const res = await fetch('http://localhost:8080/fightFit/CriarExercicio', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                nome: ex.nome,
+                                series: ex.series,
+                                repeticoes: ex.repeticoes,
+                                carga: ex.carga,
+                                treinoId: treinoId
+                            })
+                        });
+
+                        if (!res.ok) {
+                            const msg = await res.text();
+                            erros.push(`${ex.nome}: ${msg}`);
+                        }
+                    }
+
+                    // 5️⃣ Resultado final
+                    if (erros.length === 0) {
+                        alert('Treino e exercícios criados com sucesso!');
+                        form.reset();
+                        exercicios.length = 0;
+                        renderList();
+                    } else {
+                        alert('Alguns exercícios falharam:\n' + erros.join('\n'));
+                    }
+
+                } catch (err) {
+                    alert('Erro de conexão: ' + err.message);
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+
+</html>

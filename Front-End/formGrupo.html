@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Criar Grupo — FitFighter</title>
+    <link rel="stylesheet" href="header.css">
+   <link rel="stylesheet" href="formCriarGrupo.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-text"><a href="telaPrincipal.html">FitFighter</a></div>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="minhaArea.html">MINHA ÁREA</a></li>
+                <li><a href="telaGrupo.html">GRUPOS</a></li>
+                <li><a href="telaSobre.html">SOBRE NÓS</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="hamburger" id="hamburger" aria-label="menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="menu-dropdown" id="menuDropdown">
+                    <ul>
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#">Configurações</a></li>
+                        <li><a href="#">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="group-card">
+            <div class="card-top">
+                <h3>Criar Grupo</h3>
+                <div class="subtle muted">Preencha os dados do grupo e adicione exercícios</div>
+            </div>
+
+            <form id="criarGrupoForm" autocomplete="off">
+                <div>
+                    <label for="nomeGrupo">Nome do grupo</label>
+                    <input type="text" id="nomeGrupo" name="nome" placeholder="Nome do grupo" required autocomplete="off">
+                </div>
+
+                <div>
+                    <label for="senhaGrupo">Senha</label>
+                    <input type="password" id="senhaGrupo" name="senha" placeholder="Senha de acesso" autocomplete="off" required>
+                </div>
+
+                <div>
+                    <label for="descricao">Descrição</label>
+                    <textarea id="descricao" name="descricao" rows="4" placeholder="Descrição (opcional)"></textarea>
+                </div>
+
+                <hr style="border:none;height:1px;background:rgba(255,255,255,0.04);margin:12px 0">
+
+                <div>
+                    <label>Adicionar Exercício</label>
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                        <input type="text" id="exNome" placeholder="Nome do exercício" style="flex:1">
+                        <input type="number" id="exCarga" placeholder="Carga (kg)" style="width:120px">
+                        <input type="number" id="exReps" placeholder="Repetições" style="width:120px">
+                        
+                    </div>
+                </div>
+
+                <div id="listaExercicios" style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+                    <!-- Exercícios adicionados aparecem aqui -->
+                </div>
+
+                <input type="hidden" id="exerciciosData" name="exercicios">
+
+                <button type="submit" class="btn-primary">Criar Grupo</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="menu.js">
+        (function () {
+            const btnAdd = document.getElementById('btnAddEx');
+            const lista = document.getElementById('listaExercicios');
+            const exNome = document.getElementById('exNome');
+            const exCarga = document.getElementById('exCarga');
+            const exReps = document.getElementById('exReps');
+            const hidden = document.getElementById('exerciciosData');
+            const form = document.getElementById('criarGrupoForm');
+            const exercicios = [];
+
+            function renderList() {
+                lista.innerHTML = '';
+                exercicios.forEach((ex, i) => {
+                    const el = document.createElement('div');
+                    el.style.display = 'flex';
+                    el.style.justifyContent = 'space-between';
+                    el.style.alignItems = 'center';
+                    el.style.padding = '8px';
+                    el.style.border = '1px solid rgba(255,255,255,0.04)';
+                    el.style.borderRadius = '8px';
+                    el.innerHTML = `
+						<div style="flex:1">
+							<strong style="color:var(--accent)">${ex.nome}</strong>
+							<div style="font-size:0.9rem;color:rgba(255,255,255,0.75)">Carga: ${ex.carga} — Reps: ${ex.repeticoes}</div>
+						</div>
+						<div style="margin-left:12px">
+							<button type="button" data-idx="${i}" class="btn-primary" style="padding:6px 10px;background:transparent;color:var(--text);border:1px solid rgba(255,255,255,0.06);box-shadow:none">Remover</button>
+						</div>`;
+                    lista.appendChild(el);
+                });
+                hidden.value = JSON.stringify(exercicios);
+            }
+
+            btnAdd.addEventListener('click', () => {
+                const nome = exNome.value.trim();
+                const carga = exCarga.value.trim();
+                const reps = exReps.value.trim();
+                if (!nome || !carga || !reps) return alert('Preencha nome, carga e repetições do exercício');
+                exercicios.push({ nome, carga: Number(carga), repeticoes: Number(reps) });
+                exNome.value = ''; exCarga.value = ''; exReps.value = '';
+                renderList();
+            });
+
+            lista.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                const idx = Number(btn.getAttribute('data-idx'));
+                if (Number.isFinite(idx)) {
+                    exercicios.splice(idx, 1);
+                    renderList();
+                }
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // basic payload preview — replace with real POST if needed
+                const payload = {
+                    nome: document.getElementById('nomeGrupo').value.trim(),
+                    senha: document.getElementById('senhaGrupo').value,
+                    descricao: document.getElementById('descricao').value.trim(),
+                    exercicios: exercicios
+                };
+                console.log('Criar grupo payload', payload);
+                alert('Grupo criado (simulação). Veja console para payload.');
+            });
+        })();
+    </script>
+</body>
+
+</html>

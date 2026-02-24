@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFighter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="header.css"> <!-- header padrão para toda a aplicação -->
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+               
+                <span class="logo-text">FitFighter</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#minhaArea">MINHA ÁREA</a></li>
+                <li><a href="#grupos" id="navGrupos">GRUPOS</a></li>
+                <li><a href="#sobre">SOBRE NÓS</a></li>
+                
+            </ul>
+            
+            <div class="nav-actions">
+                <div id="userInfo" style="color: white; margin-right: 10px;">Email: <span id="userEmail"></span></div>
+                <button class="hamburger" id="hamburgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            
+            <!-- Menu Mobile Dropdown -->
+            <nav class="menu-dropdown" id="menuDropdown">
+                <ul>
+                    <li><a href="#minhaConta">MINHA CONTA</a></li>
+                    <li><a href="#sobre">SOBRE NÓS</a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Groups Section (hidden by default) -->
+            <section id="groupsSection" class="groups-section" style="display:none;">
+                <h2>Grupos</h2>
+                <div class="groups-actions">
+                    <button id="showCreateGroupBtn" class="btn-primary">+ Criar Grupo</button>
+                </div>
+
+                <div id="createGroupForm" class="create-group-form" style="display:none; margin-top:15px;">
+                    <div class="form-group">
+                        <input type="text" id="groupName" placeholder="Nome do grupo" />
+                    </div>
+                    <div class="form-group">
+                        <textarea id="groupDesc" placeholder="Descrição (opcional)" rows="2"></textarea>
+                    </div>
+                    <button id="createGroupBtn" class="btn-primary">Criar Grupo</button>
+                </div>
+
+                <h3 style="margin-top:20px;">Meus Grupos</h3>
+                <div id="myGroupsList" class="groups-list">
+                    <p class="empty-message">Você não participa de nenhum grupo ainda.</p>
+                </div>
+
+                <h3 style="margin-top:20px;">Todos os Grupos</h3>
+                <div id="allGroupsList" class="groups-list">
+                    <p class="empty-message">Nenhum grupo criado ainda.</p>
+                </div>
+            </section>
+
+            <!-- Form Section -->
+            <section id="formSection" class="form-section">
+                <h2>Criar Novo Treino</h2>
+                <form id="trainingForm" class="training-form">
+                    <div class="form-group">
+                        <label for="trainingName">Nome do Treino</label>
+                        <input 
+                            type="text" 
+                            id="trainingName" 
+                            placeholder="Ex: Treino de Peito"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exercise">Exercício</label>
+                        <input 
+                            type="text" 
+                            id="exercise" 
+                            placeholder="Ex: Supino"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="series">Séries</label>
+                            <input 
+                                type="number" 
+                                id="series" 
+                                min="1" 
+                                placeholder="Ex: 4"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="repetitions">Repetições</label>
+                            <input 
+                                type="number" 
+                                id="repetitions" 
+                                min="1" 
+                                placeholder="Ex: 10"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="weight">Peso (kg)</label>
+                            <input 
+                                type="number" 
+                                id="weight" 
+                                min="0" 
+                                step="0.5"
+                                placeholder="Ex: 50"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Observações</label>
+                        <textarea 
+                            id="notes" 
+                            placeholder="Adicione notas sobre o exercício"
+                            rows="3"
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">+ Adicionar Exercício</button>
+                </form>
+            </section>
+
+            <!-- Trainings List Section -->
+            <section id="trainingsSection" class="trainings-section">
+                <h2>Meus Treinos</h2>
+                <div id="trainingsList" class="trainings-list">
+                    <p class="empty-message">Nenhum treino adicionado ainda. Crie seu primeiro treino!</p>
+                </div>
+            </section>
+            
+            <!-- About Section -->
+            <section id="aboutSection" class="about-section" style="display:none; background: rgba(29,47,62,0.9); padding:20px; border-radius:12px; border:1px solid rgba(201,225,33,0.12);">
+                <h2>Sobre Nós</h2>
+                <p style="color:white; margin-top:10px;">Somos a FitFighter, uma plataforma dedicada a ajudar você a organizar seus treinos e participar de grupos de treino.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Toggle do menu mobile e fechamento ao clicar fora
+        (function(){
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const menuDropdown = document.getElementById('menuDropdown');
+
+            if (!hamburgerBtn || !menuDropdown) return;
+
+            // Garante estado inicial
+            menuDropdown.style.display = 'none';
+
+            hamburgerBtn.addEventListener('click', function(e){
+                e.stopPropagation();
+                const isOpen = menuDropdown.style.display === 'block';
+                menuDropdown.style.display = isOpen ? 'none' : 'block';
+                hamburgerBtn.classList.toggle('open', !isOpen);
+            });
+
+            // Fecha ao clicar fora
+            document.addEventListener('click', function(e){
+                if (!menuDropdown.contains(e.target) && e.target !== hamburgerBtn) {
+                    menuDropdown.style.display = 'none';
+                    hamburgerBtn.classList.remove('open');
+                }
+            });
+
+            // Fecha ao redimensionar para desktop
+            window.addEventListener('resize', function(){
+                if (window.innerWidth > 900) {
+                    menuDropdown.style.display = 'none';
+                    hamburgerBtn.classList.remove('open');
+                }
+            });
+        })();
+    </script>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        if (email) {
+            document.getElementById('userEmail').textContent = email;
+        }
+    </script>
+</body>
+</html>
