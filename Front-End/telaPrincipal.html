@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitFighter — Página Principal</title>
-    <link rel="stylesheet" href="paginaPrincipal.css">
-    <link rel="stylesheet" href="header.css">
-    
+    <link rel="stylesheet" href="assets/css/paginaPrincipal.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+
 </head>
+
 <body>
 
     <nav class="navbar">
@@ -40,19 +42,19 @@
     </nav>
 
     <main class="container main-section">
-		<div class="escolha">
-			<h1>Escolha sua experiência</h1>
-			<div class="user-greeting">Registre seus treinos, metas e acompanhe sua evolução.</div>
-		</div>
+        <div class="escolha">
+            <h1>Escolha sua experiência</h1>
+            <div class="user-greeting">Registre seus treinos, metas e acompanhe sua evolução.</div>
+        </div>
 
-		
+
 
         <section class="nav-principal">
             <article class="nav-individual">
                 <h2>Individual</h2>
                 <p>Registre sua lista de exercícios, suas metas de carga, seus PRs e quantas repetições.</p>
                 <div class="card-image">
-                    <img src="soloImage.png" alt="" width="260px">
+                    <img src="assets/imgs/soloImage.png" alt="" width="260px">
                 </div>
                 <button class="btn-primary" onclick="abrirTelaIndividual()">Clique aqui</button>
             </article>
@@ -61,21 +63,23 @@
                 <h2>Grupo</h2>
                 <p>Registre uma lista de exercícios com os seus amigos. Crie uma competição saudável!</p>
                 <div class="card-image">
-                    <img src="grupo.png" alt="" width="260px">
+                    <img src="assets/imgs/grupo.png" alt="" width="260px">
                 </div>
                 <button class="btn-primary" onclick="abrirTelaGrupo()">Clique aqui</button>
             </article>
         </section>
     </main>
 
-    <script src="menu.js"></script>
+    <script src="assets/js/amenu.js"></script>
     <script>
         function abrirTelaGrupo() {
-			window.location.href = 'telaGrupo.html';
-		}
+            window.location.href = 'telaGrupo.html';
+        }
+
         function abrirTelaIndividual() {
-        window.location.href = 'formIndividual.html';
+            window.location.href = 'formIndividual.html';
         }
     </script>
 </body>
+
 </html>

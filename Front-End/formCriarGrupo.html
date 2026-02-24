@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Criar Grupo — FitFighter</title>
-    <link rel="stylesheet" href="header.css">
-   <link rel="stylesheet" href="formCriarGrupo.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/formCriarGrupo.css">
 </head>
 
 <body>
@@ -67,7 +67,7 @@
                         <input type="text" id="exNome" placeholder="Nome do exercício" style="flex:1">
                         <input type="number" id="exCarga" placeholder="Carga (kg)" style="width:120px">
                         <input type="number" id="exReps" placeholder="Repetições" style="width:120px">
-                        
+
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@
     </div>
 
     <script>
-        (function () {
+        function initForm() {
             const btnAdd = document.getElementById('btnAddEx');
             const lista = document.getElementById('listaExercicios');
             const exNome = document.getElementById('exNome');
@@ -121,8 +121,14 @@
                 const carga = exCarga.value.trim();
                 const reps = exReps.value.trim();
                 if (!nome || !carga || !reps) return alert('Preencha nome, carga e repetições do exercício');
-                exercicios.push({ nome, carga: Number(carga), repeticoes: Number(reps) });
-                exNome.value = ''; exCarga.value = ''; exReps.value = '';
+                exercicios.push({
+                    nome,
+                    carga: Number(carga),
+                    repeticoes: Number(reps)
+                });
+                exNome.value = '';
+                exCarga.value = '';
+                exReps.value = '';
                 renderList();
             });
 
@@ -148,7 +154,7 @@
                 console.log('Criar grupo payload', payload);
                 alert('Grupo criado (simulação). Veja console para payload.');
             });
-        })();
+        }
     </script>
 </body>
 
