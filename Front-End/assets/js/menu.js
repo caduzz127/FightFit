@@ -1,44 +1,66 @@
-const hamburger = document.getElementById('hamburger');
-const dropdown = document.getElementById('menuDropdown');
+// Seleciona elementos do DOM
+const hamburgerBtn = document.getElementById('hamburguer');
+const menuDropdown = document.getElementById('menuDropdown');
+const nav = document.getElementById('nav');
 
-// Safety checks
-if (hamburger && dropdown) {
-    hamburger.setAttribute('aria-expanded', 'false');
-    dropdown.style.display = 'none';
+// Estado do menu
+let menuOpen = false;
 
-    function openMenu() {
-        hamburger.classList.add('active');
-        dropdown.classList.add('active');
-        dropdown.style.display = 'block';
-        hamburger.setAttribute('aria-expanded', 'true');
-    }
-    function closeMenu() {
-        hamburger.classList.remove('active');
-        dropdown.classList.remove('active');
-        dropdown.style.display = 'none';
-        hamburger.setAttribute('aria-expanded', 'false');
-    }
-
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (hamburger.classList.contains('active')) closeMenu();
-        else openMenu();
-    });
-
-    // Fecha ao clicar fora
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !dropdown.contains(e.target)) {
-            closeMenu();
-        }
-    });
-
-    // Fecha ao pressionar Esc
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-    });
-
-    // Fecha ao redimensionar para desktop
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) closeMenu();
-    });
+// Função para abrir o menu
+function openMenu() {
+    menuOpen = true;
+    hamburgerBtn.classList.add('active');
+    menuDropdown.classList.add('active');
+    nav.classList.add('active');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
 }
+
+// Função para fechar o menu
+function closeMenu() {
+    menuOpen = false;
+    hamburgerBtn.classList.remove('active');
+    menuDropdown.classList.remove('active');
+    nav.classList.remove('active');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+}
+
+// Função para alternar (toggle) o menu
+function toggleMenu() {
+    if (menuOpen) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
+}
+
+// Evento de clique no hamburguer
+hamburgerBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+});
+
+// Fechar menu ao clicar fora
+document.addEventListener('click', (e) => {
+    if (!hamburgerBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
+        closeMenu();
+    }
+});
+
+// Fechar menu ao pressionar ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuOpen) {
+        closeMenu();
+    }
+});
+
+// Fechar menu ao redimensionar para tamanho desktop
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) {
+        closeMenu();
+    }
+});
+
+// Inicializar: garante que o menu começa fechado
+window.addEventListener('load', () => {
+    closeMenu();
+});

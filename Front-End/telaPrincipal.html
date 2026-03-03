@@ -12,20 +12,20 @@
 
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
+    <header>
+        <div class="div-container">
             <div class="logo">
                 <div class="logo-text"><a href="telaPrincipal.html">FitFighter</a></div>
             </div>
-
-            <ul class="nav-menu">
-                <li><a href="minhaArea.html">MINHA ÁREA</a></li>
-                <li><a href="telaGrupo.html">GRUPOS</a></li>
-                <li><a href="telaSobre.html">SOBRE NÓS</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <button class="hamburger" id="hamburger" aria-label="menu">
+            <nav class="nav" id="nav">
+                <ul class="nav-menu">
+                    <li><a href="minhaArea.html">MINHA ÁREA</a></li>
+                    <li><a href="telaGrupo.html">GRUPOS</a></li>
+                    <li><a href="telaSobre.html">SOBRE NÓS</a></li>
+                </ul>
+            </nav>
+            <div class="div-actions">
+                <button class="hamburguer" id="hamburguer" aria-label="menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
     <main class="container main-section">
         <div class="escolha">
@@ -70,7 +70,7 @@
         </section>
     </main>
 
-    <script src="assets/js/amenu.js"></script>
+    <script src="assets/js/menu.js"></script>
     <script>
         function abrirTelaGrupo() {
             window.location.href = 'telaGrupo.html';
