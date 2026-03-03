@@ -3,6 +3,7 @@ package com.fightfit.fightfitapi.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Getter
@@ -23,4 +24,7 @@ public class UsuarioModel {
 
     @Column(name = "senha_usuario", nullable = false)
     private String senha;
+
+    @OneToMany(mappedBy = "usuario")
+    private ArrayList<TreinoModel> treinos;
 }
