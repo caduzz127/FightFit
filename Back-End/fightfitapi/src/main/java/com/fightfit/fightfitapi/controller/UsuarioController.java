@@ -1,9 +1,6 @@
 package com.fightfit.fightfitapi.controller;
 
-import com.fightfit.fightfitapi.dto.usuario.CreateUsuarioDto;
-import com.fightfit.fightfitapi.dto.usuario.DeleteUsuarioDto;
-import com.fightfit.fightfitapi.dto.usuario.ResponseUsuarioDto;
-import com.fightfit.fightfitapi.dto.usuario.UpdateUsuarioDto;
+import com.fightfit.fightfitapi.dto.usuario.*;
 import com.fightfit.fightfitapi.model.UsuarioModel;
 import com.fightfit.fightfitapi.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +23,7 @@ public class UsuarioController {
         ResponseUsuarioDto responseUsuarioDto = new ResponseUsuarioDto(
                 usuarioModel.getId(),
                 usuarioModel.getNome(),
-                usuarioModel.getSenha(),
-                usuarioModel.getTreinos()
+                usuarioModel.getSenha()
         );
         return ResponseEntity.status(HttpStatus.OK).body(responseUsuarioDto);
     }
@@ -47,8 +43,8 @@ public class UsuarioController {
         ResponseUsuarioDto responseUsuarioDto = new ResponseUsuarioDto(
                 usuarioModel.getId(),
                 usuarioModel.getNome(),
-                usuarioModel.getSenha(),
-                usuarioModel.getTreinos()
+                usuarioModel.getSenha()
+
         );
         return ResponseEntity.ok().body(responseUsuarioDto);
     }
@@ -61,9 +57,24 @@ public class UsuarioController {
         ResponseUsuarioDto responseUsuarioDto = new ResponseUsuarioDto(
                 usuarioModel.getId(),
                 usuarioModel.getNome(),
-                usuarioModel.getSenha(),
-                usuarioModel.getTreinos()
+                usuarioModel.getSenha()
         );
         return ResponseEntity.ok().body(responseUsuarioDto);
     }
+
+//    @GetMapping("/buscarUsuariosComTreinos")
+//    public ResponseEntity<ResponseAllUsuario> buscarAllUsuario(@RequestBody String nome){
+//        UsuarioModel usuarioModel = usuarioService.findByNome(nome);
+//
+//        ResponseAllUsuario responseAllUsuario = new ResponseAllUsuario(
+//                usuarioModel.getId(),
+//                usuarioModel.getNome(),
+//                usuarioModel.getSenha(),
+//                usuarioModel.setTreinos();
+//        );
+//        return ResponseEntity.ok().body(responseUsuarioDto);
+//    }
+
+
+
 }

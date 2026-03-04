@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -19,12 +20,12 @@ public class UsuarioModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "nome_de_usuario", nullable = false)
+    @Column(name = "nome_de_usuario", nullable = false, unique = true)
     private String nome;
 
     @Column(name = "senha_usuario", nullable = false)
     private String senha;
 
-    @OneToMany(mappedBy = "usuario")
-    private ArrayList<TreinoModel> treinos;
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<TreinoModel> treinos;
 }

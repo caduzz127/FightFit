@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.ManyToAny;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -26,6 +27,6 @@ public class TreinoModel {
     @JoinColumn(name = "id_usuarios")
     private UsuarioModel usuario;
 
-    @OneToMany(mappedBy = "treinos")
-    private ArrayList<ExercicioModel> exercicios;
+    @OneToMany(mappedBy = "treinos", cascade = CascadeType.REMOVE)
+    private List<ExercicioModel> exercicios;
 }

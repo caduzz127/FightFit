@@ -4,6 +4,6 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record CreateTreinoDto(@NotNull String nome, @NotNull UUID id_usuario) {
+public record CreateTreinoDto(@NotNull String nome, @NotNull UUID idUsuario) {
 
 }
