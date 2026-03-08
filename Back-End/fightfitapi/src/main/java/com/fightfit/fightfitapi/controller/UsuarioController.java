@@ -16,7 +16,7 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/cadastrarUsuario")
     public ResponseEntity<ResponseUsuarioDto>salvarUsuario(@RequestBody CreateUsuarioDto createUsuarioDto){
         UsuarioModel usuarioModel = usuarioService.salvarUsuario(createUsuarioDto);
 
@@ -50,8 +50,9 @@ public class UsuarioController {
     }
 
 
-    @GetMapping("/buscarUsuarios")
-    public ResponseEntity<ResponseUsuarioDto> buscarUsuarios(@RequestBody String nome){
+    @GetMapping("/buscarUsuarios/{nome}")
+    public ResponseEntity<ResponseUsuarioDto> buscarUsuarios(@PathVariable String nome){
+        System.out.println("nome recebido: "+nome);
         UsuarioModel usuarioModel = usuarioService.findByNome(nome);
 
         ResponseUsuarioDto responseUsuarioDto = new ResponseUsuarioDto(

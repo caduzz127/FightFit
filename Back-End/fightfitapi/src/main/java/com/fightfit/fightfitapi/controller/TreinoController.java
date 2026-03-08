@@ -1,18 +1,19 @@
 package com.fightfit.fightfitapi.controller;
 
 import com.fightfit.fightfitapi.dto.treino.CreateTreinoDto;
+import com.fightfit.fightfitapi.dto.treino.ResponseAllTreinoDto;
 import com.fightfit.fightfitapi.dto.treino.ResponseTreinoDto;
 import com.fightfit.fightfitapi.dto.treino.UpdateTreinoDto;
-import com.fightfit.fightfitapi.dto.usuario.CreateUsuarioDto;
-import com.fightfit.fightfitapi.dto.usuario.ResponseUsuarioDto;
 import com.fightfit.fightfitapi.model.TreinoModel;
-import com.fightfit.fightfitapi.model.UsuarioModel;
 import com.fightfit.fightfitapi.service.TreinoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @RestController()
 @RequestMapping("/fightfit/treinos")
@@ -48,5 +49,48 @@ public class TreinoController {
     }
 
 
+    @DeleteMapping("/deletarTreino/{id}")
+    public ResponseEntity<ResponseTreinoDto> deletarTreino(@PathVariable("id") UUID idTreino){
+        treinoService.deletarTreino(idTreino);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/buscarTreinosPorNome/{nome}")
+    public ResponseEntity<ResponseAllTreinoDto> buscarTreinosPorNome(@PathVariable("nome") String nome){
+        List<TreinoModel> treinoModels = treinoService.buscarTreinoPorNome(nome);
+        List<ResponseTreinoDto> responseTreinoDtos = new ArrayList<>();
+        for(int i =0;  i<treinoModels.size(); i++){
+            ResponseTreinoDto responseTreinoDto = new ResponseTreinoDto(
+                    treinoModels.get(i).getId(),
+                    treinoModels.get(i).getNome(),
+                    treinoModels.get(i).getUsuario().getId()
+            );
+            responseTreinoDtos.add(responseTreinoDto);
+        }
+        ResponseAllTreinoDto  responseTreinoDto = new ResponseAllTreinoDto(
+                responseTreinoDtos
+        );
+        return  ResponseEntity.status(HttpStatus.OK).body(responseTreinoDto);
+    }
+
+
+
+    @GetMapping("/buscarTreinosPorUsuario/{idUsuario}")
+    public ResponseEntity<ResponseAllTreinoDto> buscarTreinosPorUsuario(@PathVariable("idUsuario") UUID idUsuario){
+        List<TreinoModel> listaDeTreinos = treinoService.buscarTreinoPorIdUsuario(idUsuario);
+        List<ResponseTreinoDto> responseTreinoDtos = new ArrayList<>();
+        for(int i =0;  i<listaDeTreinos.size(); i++){
+            ResponseTreinoDto responseTreinoDto = new ResponseTreinoDto(
+                    listaDeTreinos.get(i).getId(),
+                    listaDeTreinos.get(i).getNome(),
+                    listaDeTreinos.get(i).getUsuario().getId()
+            );
+            responseTreinoDtos.add(responseTreinoDto);
+        }
+        ResponseAllTreinoDto responseTreinoDto = new ResponseAllTreinoDto(
+                responseTreinoDtos
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(responseTreinoDto);
+    }
 
 }

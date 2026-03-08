@@ -10,6 +10,10 @@ import java.util.UUID;
 
 public interface TreinoRepository extends JpaRepository<TreinoModel, UUID> {
 
-    @Query(value = "SELECT * FROM tb_treino WHERE id_usuario = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_treino WHERE id_usuarios = :id", nativeQuery = true)
     public List<TreinoModel> findTreinoByIdUsuario(@Param("id")UUID uuid);
+
+
+    @Query(value = "SELECT * FROM tb_treino WHERE nome_treino ILIKE :nome", nativeQuery = true)
+    public List<TreinoModel> findTreinoByName(@Param("nome")String nome);
 }

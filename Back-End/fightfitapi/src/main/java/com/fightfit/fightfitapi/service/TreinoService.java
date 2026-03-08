@@ -64,7 +64,11 @@ public class TreinoService {
 
 
 
+    public List<TreinoModel> buscarTreinoPorNome(String nome){
 
+
+        return treinoRepository.findTreinoByName("%"+nome+"%");
+    }
 
 
 
