@@ -1,7 +1,6 @@
 package com.fightfit.fightfitapi.service;
 
 import com.fightfit.fightfitapi.dto.usuario.CreateUsuarioDto;
-import com.fightfit.fightfitapi.dto.usuario.ResponseAllUsuario;
 import com.fightfit.fightfitapi.dto.usuario.UpdateUsuarioDto;
 import com.fightfit.fightfitapi.model.UsuarioModel;
 import com.fightfit.fightfitapi.repository.UsuarioRepository;
@@ -59,7 +58,10 @@ public class UsuarioService {
     }
 
 
-
+    public UsuarioModel findByNomeAndSenha(String nome,String senha){
+        UsuarioModel usuarioModel = usuarioRepository.findByNameAndSenha(nome,senha).orElseThrow( ()-> new RuntimeException("usuario nao encontrado"));
+        return usuarioModel;
+    }
 //    public UsuarioModel findByNameAll(ResponseAllUsuario responseAllUsuario){
 //        if(usuarioRepository.findByName(responseAllUsuario.nome()).isPresent()){
 //            throw new RuntimeException("Nome de Usuário já cadastrado no sistema");

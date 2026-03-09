@@ -1,9 +1,6 @@
 package com.fightfit.fightfitapi.controller;
 
-import com.fightfit.fightfitapi.dto.treino.CreateTreinoDto;
-import com.fightfit.fightfitapi.dto.treino.ResponseAllTreinoDto;
-import com.fightfit.fightfitapi.dto.treino.ResponseTreinoDto;
-import com.fightfit.fightfitapi.dto.treino.UpdateTreinoDto;
+import com.fightfit.fightfitapi.dto.treino.*;
 import com.fightfit.fightfitapi.model.TreinoModel;
 import com.fightfit.fightfitapi.service.TreinoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +53,7 @@ public class TreinoController {
     }
 
     @GetMapping("/buscarTreinosPorNome/{nome}")
-    public ResponseEntity<ResponseAllTreinoDto> buscarTreinosPorNome(@PathVariable("nome") String nome){
+    public ResponseEntity<ResponseTreinoByNomeDto> buscarTreinosPorNome(@PathVariable("nome") String nome){
         List<TreinoModel> treinoModels = treinoService.buscarTreinoPorNome(nome);
         List<ResponseTreinoDto> responseTreinoDtos = new ArrayList<>();
         for(int i =0;  i<treinoModels.size(); i++){
@@ -67,30 +64,14 @@ public class TreinoController {
             );
             responseTreinoDtos.add(responseTreinoDto);
         }
-        ResponseAllTreinoDto  responseTreinoDto = new ResponseAllTreinoDto(
+        ResponseTreinoByNomeDto  responseTreinosDto = new ResponseTreinoByNomeDto(
                 responseTreinoDtos
         );
-        return  ResponseEntity.status(HttpStatus.OK).body(responseTreinoDto);
+        return  ResponseEntity.status(HttpStatus.OK).body(responseTreinosDto);
     }
 
 
 
-    @GetMapping("/buscarTreinosPorUsuario/{idUsuario}")
-    public ResponseEntity<ResponseAllTreinoDto> buscarTreinosPorUsuario(@PathVariable("idUsuario") UUID idUsuario){
-        List<TreinoModel> listaDeTreinos = treinoService.buscarTreinoPorIdUsuario(idUsuario);
-        List<ResponseTreinoDto> responseTreinoDtos = new ArrayList<>();
-        for(int i =0;  i<listaDeTreinos.size(); i++){
-            ResponseTreinoDto responseTreinoDto = new ResponseTreinoDto(
-                    listaDeTreinos.get(i).getId(),
-                    listaDeTreinos.get(i).getNome(),
-                    listaDeTreinos.get(i).getUsuario().getId()
-            );
-            responseTreinoDtos.add(responseTreinoDto);
-        }
-        ResponseAllTreinoDto responseTreinoDto = new ResponseAllTreinoDto(
-                responseTreinoDtos
-        );
-        return ResponseEntity.status(HttpStatus.OK).body(responseTreinoDto);
-    }
+
 
 }

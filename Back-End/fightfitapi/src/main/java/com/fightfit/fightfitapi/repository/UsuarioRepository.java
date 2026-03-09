@@ -16,4 +16,8 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, UUID> {
 
     @Query(value = "SELECT DISTINCT u FROM tb_usuario u JOIN FETCH u.treinos WHERE u.nome_de_usuario = :nome",nativeQuery = true)
     public Optional<UsuarioModel> findByNameUsuarioAndTreino(@Param("nome")String nome);
+
+    @Query(value = "select * from tb_usuario where nome_de_usuario = :nome and senha_usuario = :senha", nativeQuery = true)
+    public Optional<UsuarioModel> findByNameAndSenha(@Param("nome")String nome, @Param("senha")String senha);
+
 }

@@ -5,6 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record CreateExercicioDto(@NotNull String nome, @NotNull int repeticoes, @NotNull int serie,
-                                 @NotNull double carga, @NotNull UUID id_treino) {
+                                 @NotNull double carga, @NotNull UUID idTreino) {
 
 }

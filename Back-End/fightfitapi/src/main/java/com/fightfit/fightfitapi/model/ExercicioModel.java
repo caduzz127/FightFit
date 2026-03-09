@@ -1,5 +1,6 @@
 package com.fightfit.fightfitapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,6 +33,7 @@ public class ExercicioModel {
 
     @ManyToOne
     @JoinColumn(name = "id_treino")
+    @JsonIgnore
     private TreinoModel treinos;
 
 }

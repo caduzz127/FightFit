@@ -1,5 +1,6 @@
 package com.fightfit.fightfitapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ManyToAny;
@@ -25,6 +26,7 @@ public class TreinoModel {
 
     @ManyToOne
     @JoinColumn(name = "id_usuarios")
+    @JsonIgnore
     private UsuarioModel usuario;
 
     @OneToMany(mappedBy = "treinos", cascade = CascadeType.REMOVE)

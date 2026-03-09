@@ -56,7 +56,7 @@ public class TreinoService {
     public List<TreinoModel> buscarTreinoPorIdUsuario(UUID uuid){
 
         if(!usuarioRepository.findById(uuid).isPresent()){
-            throw new RuntimeException("Não existe nenhum treino com esse id");
+            throw new RuntimeException("Não existe nenhum usuario com esse id");
         }
 
         return treinoRepository.findTreinoByIdUsuario(uuid);
