@@ -26,12 +26,13 @@ async function fazerLogin(event) {
       throw new Error("Erro no servidor");
     }
 
-    const data = await response.json();
+    const usuario = await response.json();
 
-    console.log("Usuário logado:", data);
+    sessionStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+    console.log("Usuário logado:", usuario.id);
 
     window.location.href = "telaPrincipal.html";
-
+    
   } catch (error) {
     console.error(error);
     alert("Erro ao conectar com a API");

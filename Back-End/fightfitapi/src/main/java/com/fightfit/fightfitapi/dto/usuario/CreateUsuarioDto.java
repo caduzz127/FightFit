@@ -4,4 +4,6 @@ import jakarta.validation.constraints.NotNull;
 
 public record CreateUsuarioDto(@NotNull String nome, @NotNull String senha) {
 
+
+    
 }

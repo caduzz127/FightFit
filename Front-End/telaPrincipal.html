@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitFighter — Página Principal</title>
+    <link rel="stylesheet" href="assets/css/styleGlobal.css">
     <link rel="stylesheet" href="assets/css/paginaPrincipal.css">
     <link rel="stylesheet" href="assets/css/header.css">
-
+    <script src="assets/js/guardarInformacoes.js" defer></script>
+    <script src="assets/js/menu.js" defer></script>
 </head>
 
 <body>
@@ -30,13 +32,11 @@
                     <span></span>
                     <span></span>
                 </button>
-                <div class="menu-dropdown" id="menuDropdown">
-                    <ul>
-                        <li><a href="#">Perfil</a></li>
-                        <li><a href="#">Configurações</a></li>
-                        <li><a href="#">Sair</a></li>
-                    </ul>
-                </div>
+            </div>
+
+            <div class="div-perfil">
+                <img src="assets/imgs/do-utilizador (1).png" alt="Imagem do usuário" width="32px">
+                <p id="nomeUsuario" class="nomeUsuarios"></p>
             </div>
         </div>
     </header>
@@ -70,14 +70,14 @@
         </section>
     </main>
 
-    <script src="assets/js/menu.js"></script>
+    
     <script>
         function abrirTelaGrupo() {
             window.location.href = 'telaGrupo.html';
         }
 
         function abrirTelaIndividual() {
-            window.location.href = 'formIndividual.html';
+            window.location.href = 'telaIndividual.html';
         }
     </script>
 </body>
