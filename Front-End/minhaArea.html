@@ -6,62 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="assets/css/header.css">
-    <style>
-        #treinosContainer {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 16px 0
-        }
-        
-        .treino-card {
-            border: 1px solid #ddd;
-            padding: 12px;
-            border-radius: 6px;
-            min-width: 200px;
-            max-width: 320px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04)
-        }
-        
-        .treino-card h3 {
-            margin: 0 0 8px;
-            font-size: 1.05rem
-        }
-        
-        .treino-card p {
-            margin: 4px 0;
-            color: #333
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/styleGlobal.css">
+    <script src="assets/js/guardarInformacoes.js" defer></script>
+    <script src="assets/js/exibirTreinos"></script>
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
+    <header>
+        <div class="div-container">
             <div class="logo">
                 <div class="logo-text"><a href="telaPrincipal.html">FitFighter</a></div>
             </div>
-
-            <ul class="nav-menu">
-                <li><a href="minhaArea.html">MINHA ÁREA</a></li>
-                <li><a href="telaGrupo.html">GRUPOS</a></li>
-                <li><a href="telaSobre.html">SOBRE NÓS</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <button class="hamburger" id="hamburger" aria-label="menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
+            <nav class="nav" id="nav">
+                <ul class="nav-menu">
+                    <li><a href="minhaArea.html">MINHA ÁREA</a></li>
+                    <li><a href="telaGrupo.html">GRUPOS</a></li>
+                    <li><a href="telaSobre.html">SOBRE NÓS</a></li>
+                </ul>
+            </nav>
+            <div class="div-actions">
+                <button class="hamburguer" id="hamburguer" aria-label="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
-                <div class="menu-dropdown" id="menuDropdown">
-                    <ul>
-                        <li><a href="#">Perfil</a></li>
-                        <li><a href="#">Configurações</a></li>
-                        <li><a href="#">Sair</a></li>
-                    </ul>
-                </div>
+            </div>
+
+            <div class="div-perfil">
+                <img src="assets/imgs/do-utilizador (1).png" alt="Imagem do usuário" width="32px">
+                <p id="nomeUsuario" class="nomeUsuarios"></p>
             </div>
         </div>
-    </nav>
+    </header>
 
     <main class="content">
         <section>

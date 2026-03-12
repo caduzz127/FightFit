@@ -1,3 +1,3 @@
-const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+const usuario = JSON.parse(sessionStorage.getItem("usuarioLogado"));
 
 document.getElementById("nomeUsuario").textContent = usuario ? usuario.nome : "";
