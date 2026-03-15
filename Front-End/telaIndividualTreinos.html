@@ -10,18 +10,23 @@
         <link rel="stylesheet" href="assets/css/telaIndividual.css">
         <script src="assets/js/guardarInformacoes.js" defer></script>
         <script src="assets/js/exibirTreinos.js" defer></script>
+        <script src="assets/js/cadastrarTreino.js" defer></script>
+        <script src="assets/js/cadastrarExercicio.js" defer></script>
     </head>
 
     <body>
         <header>
             <div class="div-container">
                 <div class="logo">
-                    <div class="logo-text"><a
-                            href="telaPrincipal.html">FitFighter</a></div>
+                    <div class="logo-text">
+                        <a
+                            href="telaPrincipal.html">FitFighter</a>
+                    </div>
                 </div>
                 <nav class="nav" id="nav">
                     <ul class="nav-menu">
-                        <li><a href="minhaArea.html">MINHA ÁREA</a></li>
+                        <li><a href="telaIndividualTreinos.html">MINHA
+                                ÁREA</a></li>
                         <li><a href="telaGrupo.html">GRUPOS</a></li>
                         <li><a href="telaSobre.html">SOBRE NÓS</a></li>
                     </ul>
@@ -50,28 +55,87 @@
             </div>
 
             <div class="cards-treino" id="listaTreinos">
-                <div class="card-treino">
-                    <h2 id="NomeTreino" class="nome-treino">Treino A</h2>
-                    <div class="exercicios">
-                        <p>Nome do exercicio: Supino na Máquina</p>
-                        <p>Carga: 60.0</p>
-                        <p>Repetições: 12</p>
-                        <p>Series: 3</p>
-                    </div>
 
-                </div>
-                <div class="card-treino">
-                    <h2 id="NomeTreino" class="nome-treino">Treino A</h2>
-                    <div class="exercicios">
-                        <p>Nome do exercicio: Supino na Máquina</p>
-                        <p>Carga: 60.0</p>
-                        <p>Repetições: 12</p>
-                        <p>Series: 3</p>
-                    </div>
+            </div>
 
-                </div>
+            <div class="div-adicionar-treino">
+                <button class="adicionar-treino" id="adicionarTreino">Adicionar
+                    Treino</button>
             </div>
         </div>
+
+        <!--MODAL PARA ADICIONAR TREINOS-->
+        <div class="modal-overlay" id="modalTreinoOverlay">
+
+            <div class="modal-adicionar-treino">
+
+                <div class="modal-adicionar-treino-header">
+                    <div>
+                        <h2>Adicionar Treino</h2>
+                        <h3>Preencha todas as informações para criar um novo
+                            treino</h3>
+                    </div>
+                    <div class="fechar-modal">
+                        <button id="fecharModalTreino"> X </button>
+                    </div>
+                </div>
+
+                <form class="modal-formAdicionarTreino">
+                    <label for="nomeTreino">Nome do Treino</label>
+                    <input type="text" id="nomeTreino"
+                        placeholder="Ex: Treino de Peito">
+
+                    <button type="submit" onclick="adicionarTreino()">
+                        Adicionar Treino
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!--MODAL  PARA ADICIONAR EXERCICIOS-->
+        <div class="modal-overlay" id="modalOverlayExercicios">
+
+            <div class="modal-adicionar-exercicios">
+
+                <div class="modal-adicionar-exercicios-header">
+                    <div>
+                        <h2>Adicionar Exercício</h2>
+                        <h3>Preencha todas as informações para criar um novo
+                            exercício</h3>
+                    </div>
+                    <div class="fechar-modal">
+                        <button id="fecharModalExercicios"> X </button>
+                    </div>
+                </div>
+
+                <form class="modal-formAdicionarExercicios">
+
+                    <label for="nomeExercicio">Nome do Exercício</label>
+                    <input type="text" id="nomeExercicio"
+                        placeholder="Ex: Supino Reto">
+
+                    <label>Carga</label>
+                    <input type="number" id="exercicio1" placeholder="Ex: 60kg">
+
+                    <label>Séries</label>
+                    <input type="number" id="exercicio2" placeholder="Ex: 4">
+
+                    <label>Repetições</label>
+                    <input type="number" id="exercicio3" placeholder="Ex: 10">
+
+                    <button type="submit" onclick="adicionarExercicio()">
+                        Adicionar Exercício
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </body>
 
 </html>
