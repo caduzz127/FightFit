@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/fightfit/exercicios")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class ExercicioController {
 
     @Autowired

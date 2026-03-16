@@ -14,7 +14,10 @@ import java.util.UUID;
 
 @RestController()
 @RequestMapping("/fightfit/treinos")
-@CrossOrigin("*")
+@CrossOrigin(
+        origins = "*",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS}
+)
 public class TreinoController {
 
 
@@ -30,7 +33,7 @@ public class TreinoController {
                 treinoModel.getNome(),
                 treinoModel.getUsuario().getId()
         );
-        return ResponseEntity.status(HttpStatus.OK).body(responseTreinoDto);
+        return ResponseEntity.ok().body(responseTreinoDto);
     }
 
 

@@ -1,5 +1,6 @@
 const modalExercicios = document.getElementById("modalOverlayExercicios");
 const fecharModalExercicios = document.getElementById("fecharModalExercicios");
+console.log("Modal Exercícios:", modalExercicios, fecharModalExercicios);
 
 fecharModalExercicios.addEventListener("click", () => {
     modalExercicios.classList.remove("ativo");

@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("/fightfit/usuario")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
 
     @Autowired
