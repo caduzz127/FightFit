@@ -12,6 +12,8 @@
         <script src="assets/js/treinos/exibirTreinos.js" defer></script>
         <script src="assets/js/guardarInformacoes.js" defer></script>
         <script src="assets/js/exercicio/cadastrarExercicio.js" defer></script>
+        <script src="assets/js/treinos/alterarTreino.js" defer></script>
+        <script src="assets/js/treinos/modalAlterarExcluir.js" defer></script>
     </head>
 
     <body>
@@ -57,29 +59,68 @@
             <div class="cards-treino" id="listaTreinos">
                 <div class="card-treino">
                     <div class="card-treino-header">
-                        <h2>Treino de Peito</h2>
-                        <button id="abrirFuncionalidade"><img
-                                src="assets/imgs/menu.svg" alt="Fechar"
+                        <h2 class="nome-treino">Treino de Peito</h2>
+                        <button class="abrirModalTreino">
+                            <img src="assets/imgs/menu.svg" alt="Abrir menu"
                                 width="30px">
                         </button>
                     </div>
+
                     <div class="exercicios-conteiner">
                         <div class="exercicios-conteiner-header">
                             <h2>Exercícios</h2>
                         </div>
+
                         <div class="exercicios">
-                            <p>Nome do exercicio: </p>
-                            <p>Carga: </p>
-                            <p>Repetições: </p>
-                            <p>Series: </p>
+                            <p>Nome do exercicio:</p>
+                            <p>Carga:</p>
+                            <p>Repetições:</p>
+                            <p>Series:</p>
                         </div>
+
                         <div class="exercicios">
-                            <p>Nome do exercicio: </p>
-                            <p>Carga: </p>
-                            <p>Repetições: </p>
-                            <p>Series: </p>
+                            <p>Nome do exercicio:</p>
+                            <p>Carga:</p>
+                            <p>Repetições:</p>
+                            <p>Series:</p>
                         </div>
                     </div>
+
+                    <div class="div-adicionar-exercicios">
+                        <button class="adicionarExercicios">
+                            Adicionar Exercício
+                        </button>
+                    </div>
+                </div>
+                <div class="card-treino">
+                    <div class="card-treino-header">
+                        <h2 class="nome-treino">Treino de Peito</h2>
+                        <button class="abrirModalTreino">
+                            <img src="assets/imgs/menu.svg" alt="Abrir menu"
+                                width="30px">
+                        </button>
+                    </div>
+
+                    <div class="exercicios-conteiner">
+                        <div class="exercicios-conteiner-header">
+                            <h2>Exercícios</h2>
+                        </div>
+
+                        <div class="exercicios">
+                            <p>Nome do exercicio:</p>
+                            <p>Carga:</p>
+                            <p>Repetições:</p>
+                            <p>Series:</p>
+                        </div>
+
+                        <div class="exercicios">
+                            <p>Nome do exercicio:</p>
+                            <p>Carga:</p>
+                            <p>Repetições:</p>
+                            <p>Series:</p>
+                        </div>
+                    </div>
+
                     <div class="div-adicionar-exercicios">
                         <button class="adicionarExercicios">
                             Adicionar Exercício
@@ -114,15 +155,10 @@
                     <label for="nomeTreino">Nome do Treino</label>
                     <input type="text" id="nomeTreino"
                         placeholder="Ex: Treino de Peito">
-
-                    <button type="submit" onclick="cadastrarTreino()">
-                        Adicionar Treino
-                    </button>
-
+                    <button type="submit" onclick="cadastrarTreino()">Adicionar
+                        Treino</button>
                 </form>
-
             </div>
-
         </div>
 
         <!--MODAL  PARA ADICIONAR EXERCICIOS-->
@@ -167,8 +203,7 @@
         </div>
 
         <!--MODAL PARA MEXER NO TREINO MUDAR O NOME OU EXCLUIR-->
-        <div class="alterar-treino-modal-overlay"
-            id="alterarTreinoModalOverlay">
+        <div class="modal-overlay" id="alterarTreinoModalOverlay">
 
             <div class="alterar-treino-modal">
                 <div class="alterar-treino-modal-header">
@@ -176,14 +211,16 @@
                     <button id="fecharAlterarTreinoModal"> X </button>
                 </div>
 
-                <div class="div-alterar-excluir-treino">
-                    <button id="abrirAlterarTreinoModal"> Alterar Treino
-                    </button>
-                    <button id="excluirTreinoModal"> Excluir Treino </button>
+                <div class="div-alterar-treino">
+                    <button id="abrirAlterarTreinoModal"
+                        class="btn-alterar-treino-nome"> Alterar Nome</button>
+                    <button id="excluirTreinoModal" class="btn-excluir-treino">
+                        Excluir Treino </button>
                 </div>
 
-                <div class="alterar-treino-modal-alterar">
-                    <h2>Alterar NNome do Treino</h2>
+                <div class="alterar-treino-modal-alterar"
+                    id="modalAlterarTreino">
+                    <h2>Alterar Nome do Treino</h2>
                     <form class="modal-formAlterarTreino">
                         <label for="novoNomeTreino">Novo nome do Treino</label>
                         <input type="text" id="novoNomeTreino"
@@ -195,7 +232,7 @@
                     </form>
                 </div>
 
-                <div class="excluir-treino-modal">
+                <div class="excluir-treino-modal" id="modalExcluirTreino">
                     <h2>Tem certeza que deseja excluir este treino?</h2>
                     <button id="confirmarExclusaoTreino"
                         onclick="excluirTreino()"> Sim, excluir treino </button>

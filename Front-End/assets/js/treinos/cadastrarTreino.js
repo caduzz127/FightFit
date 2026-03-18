@@ -40,11 +40,10 @@ async function cadastrarTreino() {
 
         alert("Treino cadastrado com sucesso!");
 
-        // limpar input
+        
         nomeTreinoInput.value = "";
 
-        // atualizar lista de treinos
-        exibirTreinos();
+       window.Location.href = "telaIndividual.html";
 
     } catch (error) {
         console.error("Erro:", error);

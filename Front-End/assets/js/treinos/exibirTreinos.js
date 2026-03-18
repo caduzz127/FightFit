@@ -41,7 +41,17 @@ async function exibirTreinos() {
 
             let card = `
             <div class="card-treino">
-                <h2 class="nome-treino">${treino.nome}</h2>
+                    <div class="card-treino-header">
+                        <h2 class="nome-treino">${treino.nome}</h2>
+                        <button class="abrirModalTreino"><img
+                                src="assets/imgs/menu.svg" alt="Fechar"
+                                width="30px">
+                        </button>
+                    </div>
+                    <div class="exercicios-conteiner">
+                        <div class="exercicios-conteiner-header">
+                            <h2>Exercícios</h2>
+                        </div>
             `;
 
             if (treino.listaDeExercicios.length === 0) {
@@ -69,12 +79,13 @@ async function exibirTreinos() {
 
             }
 
-            card += `<div class="div-adicionar-exercicios">
-                    <button class="adicionarExercicios" data-id="${treino.id}">
-                    Adicionar Exercício
-                    </button>
+            card += `</div>
+                    <div class="div-adicionar-exercicios">
+                        <button class="adicionarExercicios" data-id="${treino.id}">
+                        Adicionar Exercício
+                        </button>
                     </div>
-                    </div>
+                </div>
             `;
 
             listaTreinos.innerHTML += card;
