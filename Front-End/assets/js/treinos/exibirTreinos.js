@@ -40,10 +40,10 @@ async function exibirTreinos() {
         dados.listaDeTreinos.forEach(treino => {
 
             let card = `
-            <div class="card-treino">
+            <div class="card-treino" data-id="${treino.id}">
                     <div class="card-treino-header">
                         <h2 class="nome-treino">${treino.nome}</h2>
-                        <button class="abrirModalTreino"><img
+                        <button class="abrirModalTreino" ><img
                                 src="assets/imgs/menu.svg" alt="Fechar"
                                 width="30px">
                         </button>
@@ -86,9 +86,11 @@ async function exibirTreinos() {
                         </button>
                     </div>
                 </div>
+                
             `;
 
             listaTreinos.innerHTML += card;
+            console.log(`Treino adicionado ao HTML: ${treino.id} - ${treino.nome}`);
 
         });
 

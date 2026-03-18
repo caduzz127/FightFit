@@ -1,11 +1,9 @@
 const listaTreinos = document.getElementById('listaTreinos');
 const modal = document.getElementById('alterarTreinoModalOverlay');
 const btnFechar = document.getElementById('fecharAlterarTreinoModal');
+const fecharModalDeAlterar = document.getElementById('cancelarExclusaoTreino');
 
-// 🔒 garante que os elementos existem
 if (listaTreinos && modal && btnFechar) {
-
-    // ABRIR MODAL (funciona HTML + API)
     listaTreinos.addEventListener('click', (event) => {
         const btn = event.target.closest('.abrirModalTreino');
 
@@ -39,6 +37,9 @@ if (listaTreinos && modal && btnFechar) {
         }
     });
 
+    fecharModalDeAlterar.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 }
 
 

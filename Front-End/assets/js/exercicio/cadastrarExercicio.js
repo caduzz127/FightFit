@@ -1,3 +1,24 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//para abrir o modal de exercicios
 const modalExercicios = document.getElementById("modalOverlayExercicios");
 const fecharModalExercicios = document.getElementById("fecharModalExercicios");
 console.log("Modal Exercícios:", modalExercicios, fecharModalExercicios);

@@ -25,7 +25,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
-    gap: 40px;
+    gap: 30px;
 }
 
 .card-treino {
