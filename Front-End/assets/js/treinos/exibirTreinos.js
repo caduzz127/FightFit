@@ -20,7 +20,7 @@ async function exibirTreinos() {
 
         listaTreinos.innerHTML = "";
 
-        // ✅ SE NÃO TIVER TREINOS
+        //caso não tenha treinos
         if (dados.listaDeTreinos.length === 0) {
 
             listaTreinos.innerHTML = `
@@ -36,7 +36,7 @@ async function exibirTreinos() {
             return;
         }
 
-        // ✅ SE TIVER TREINOS
+        // se tiver treinos
         dados.listaDeTreinos.forEach(treino => {
 
             let card = `

@@ -43,7 +43,7 @@ async function cadastrarTreino() {
         
         nomeTreinoInput.value = "";
 
-       window.Location.href = "telaIndividual.html";
+       window.Location.href = "telaIndividualTreinos.html";
 
     } catch (error) {
         console.error("Erro:", error);

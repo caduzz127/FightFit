@@ -16,7 +16,7 @@
         <script src="assets/js/exercicio/cadastrarExercicio.js" defer></script>
         <script src="assets/js/treinos/alterarTreino.js" defer></script>
         <script src="assets/js/treinos/modalAlterarExcluir.js" defer></script>
-        <script src="assets/js/treinos/excluirTreino.js" defer></script>
+        <!--<script src="assets/js/treinos/excluirTreino.js" defer></script>-->
     </head>
 
     <body>
@@ -230,9 +230,8 @@
                     <form class="modal-formAlterarTreino">
                         <label for="novoNomeTreino">Novo nome do Treino</label>
                         <input type="text" id="novoNomeTreino"
-                            placeholder="Ex: Treino de Peito">
-                        <button type="submit" id="salvarAlteracaoTreino"
-                            onclick="salvarAlteracaoTreino()">
+                            placeholder="Ex: Treino de Peito" required>
+                        <button type="button" class="salvarAlteracaoTreino">
                             Salvar Alterações
                         </button>
                     </form>
