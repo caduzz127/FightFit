@@ -1,7 +1,5 @@
-
 //PEGAR O ID DO CARD
-
-let idSelecionado = null;
+let idSelecionadoAlterar = null;
 
 document.addEventListener('click', function (e) {
     const btn = e.target.closest('.abrirModalTreino');
@@ -14,9 +12,9 @@ document.addEventListener('click', function (e) {
             return;
         }
 
-        idSelecionado = card.dataset.id;
+        idSelecionadoAlterar = card.dataset.id;
 
-        console.log('ID selecionado:', idSelecionado);
+        console.log('ID selecionado:', idSelecionadoAlterar);
     }
 });
 
@@ -30,7 +28,7 @@ document.addEventListener('click', function (e) {
             alert("O nome do treino não pode ser vazio.");
             return;
         }
-        alterarTreino(idSelecionado, novoNomeTreino);
+        alterarTreino(idSelecionadoAlterar, novoNomeTreino);
         window.location.href = "telaIndividualTreinos.html";
     }
 

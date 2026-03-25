@@ -1,6 +1,7 @@
-let idSelecionado = null;
+let idSelecionadoExcluir = null;
 
 document.addEventListener('click', function (e) {
+    console.log('Clique detectado:', e.target);
     const btn = e.target.closest('.abrirModalTreino');
 
     if (btn) {
@@ -11,26 +12,29 @@ document.addEventListener('click', function (e) {
             return;
         }
 
-        idSelecionado = card.dataset.id;
+        idSelecionadoExcluir = card.dataset.id;
 
-        console.log('ID selecionado:', idSelecionado);
+        console.log('ID selecionado:', idSelecionadoExcluir);
     }
 });
 
 
 document.addEventListener('click', function (e) {
     const btnConfirmarExclusao = e.target.closest('.confirmarExclusaoTreino');
-    if (idSelecionado) {
+     console.log('Clique detectado no btn de excluir', btnConfirmarExclusao);
+    if (idSelecionadoExcluir) {
 
 
         if (btnConfirmarExclusao) {
-            console.log('Botão de confirmação de exclusão clicado. ID do treino a excluir:', idSelecionado);
-            excluirTreino(idSelecionado);
+            console.log('Clique detectado no btn de excluir');
+           
+            excluirTreino(idSelecionadoExcluir);
         }
     }
 });
 
 async function excluirTreino(id) {
+    console.log('Iniciando exclusão do treino com ID:', id);
     try {
         const response = await fetch(`http://localhost:8080/fightfit/treinos/deletarTreino/${id}`, {
             method: 'DELETE',

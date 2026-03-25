@@ -25,11 +25,14 @@ async function exibirTreinos() {
 
             listaTreinos.innerHTML = `
                 <div class="card-treino">
-                    <h2 class="nome-treino">Você ainda não tem treinos</h2>
+                   <div class="card-treino-header">
+                        <h2 class="nome-treino">Você ainda não tem treinos</h2>
+                        
+                    </div>
                     <div class="exercicios">
                         <p>Crie seu primeiro treino para começar.</p>
                     </div>
-                    <button class="btn-adicionar-treino" onclick="abrirModal()">Adicionar Treino</button>
+                    
                 </div>
             `;
 

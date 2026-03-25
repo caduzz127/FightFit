@@ -43,8 +43,8 @@ async function cadastrarTreino() {
         
         nomeTreinoInput.value = "";
 
-       window.Location.href = "telaIndividualTreinos.html";
-
+        window.Location.href = "telaIndividualTreinos.html";
+        
     } catch (error) {
         console.error("Erro:", error);
         alert("Erro ao cadastrar treino.");
