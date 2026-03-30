@@ -14,13 +14,8 @@ import java.util.UUID;
 
 @RestController()
 @RequestMapping("/fightfit/treinos")
-@CrossOrigin(
-        origins = "*",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS}
-)
+@CrossOrigin(origins = "*")
 public class TreinoController {
-
-
     @Autowired
     TreinoService treinoService;
 

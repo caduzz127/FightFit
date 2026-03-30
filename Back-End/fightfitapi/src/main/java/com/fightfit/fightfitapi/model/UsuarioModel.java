@@ -28,4 +28,7 @@ public class UsuarioModel {
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<TreinoModel> treinos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<GrupoUsuariosModel> grupos;
 }
