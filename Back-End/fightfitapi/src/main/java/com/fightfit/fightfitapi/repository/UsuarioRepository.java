@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, UUID> {
 
 
-    @Query(value = "SELECT * FROM tb_usuario WHERE nome_de_usuario = :nome",nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_usuario WHERE nome_de_usuario = :nome", nativeQuery = true)
     public Optional<UsuarioModel> findByName(@Param("nome")String nome);
 
     @Query(value = "SELECT DISTINCT u FROM tb_usuario u JOIN FETCH u.treinos WHERE u.nome_de_usuario = :nome",nativeQuery = true)

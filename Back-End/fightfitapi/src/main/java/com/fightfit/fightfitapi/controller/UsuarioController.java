@@ -76,6 +76,7 @@ public class UsuarioController {
     public ResponseEntity<ResponseAllUsuarioDto> buscarUsuariosComTreino(@PathVariable String nome){
         System.out.println("nome recebido: "+nome);
         UsuarioModel usuarioModel = usuarioService.findByNome(nome);
+
         List<ResponseTreinoWithExercicios> listaDeTreinos = usuarioModel.getTreinos()
                 .stream()
                 .map(treino -> new ResponseTreinoWithExercicios(
@@ -95,6 +96,8 @@ public class UsuarioController {
                                 .toList()
                 ))
                 .toList();
+
+
         ResponseAllUsuarioDto responseUsuarioDto = new ResponseAllUsuarioDto(
                 usuarioModel.getId(),
                 usuarioModel.getNome(),
@@ -102,6 +105,9 @@ public class UsuarioController {
         );
         return ResponseEntity.ok().body(responseUsuarioDto);
     }
+
+
+
 
     @PostMapping("/login")
     public ResponseEntity<ResponseLoginDto> login(@RequestBody RequestLoginDto requestLoginDto){

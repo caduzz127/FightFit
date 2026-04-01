@@ -62,12 +62,5 @@ public class UsuarioService {
         UsuarioModel usuarioModel = usuarioRepository.findByNameAndSenha(nome,senha).orElseThrow( ()-> new RuntimeException("usuario nao encontrado"));
         return usuarioModel;
     }
-//    public UsuarioModel findByNameAll(ResponseAllUsuario responseAllUsuario){
-//        if(usuarioRepository.findByName(responseAllUsuario.nome()).isPresent()){
-//            throw new RuntimeException("Nome de Usuário já cadastrado no sistema");
-//        }
-//        UsuarioModel usuarioModel =
-//
-//        return
-//    }
+
 }

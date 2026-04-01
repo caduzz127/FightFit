@@ -3,6 +3,7 @@ package com.fightfit.fightfitapi.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -23,12 +24,11 @@ public class GrupoModel {
     @Column(name = "senha_do_grupo")
     private String senha;
 
-    @Column
-    private String cargo;
+    @OneToMany(mappedBy = "grupo")
+    private List<GrupoUsuariosModel> usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private UsuarioModel usuario;
+
+
 
 
 }
