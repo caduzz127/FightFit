@@ -29,6 +29,5 @@ public class GrupoUsuariosModel {
     @Column
     private String cargo;
 
-    @OneToMany(mappedBy = "grupoUsuario")
-    private List<RankingModel> ranking;
+    
 }

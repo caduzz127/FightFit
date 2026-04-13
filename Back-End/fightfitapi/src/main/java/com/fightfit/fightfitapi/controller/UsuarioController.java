@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController()
 @RequestMapping("/fightfit/usuario")
@@ -22,7 +23,7 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    @PostMapping("/cadastrarUsuario")
+    @PostMapping("/cadastrar")
     public ResponseEntity<ResponseUsuarioDto>salvarUsuario(@RequestBody CreateUsuarioDto createUsuarioDto){
         UsuarioModel usuarioModel = usuarioService.salvarUsuario(createUsuarioDto);
         System.out.println("Salvo com sucesso");
@@ -36,13 +37,13 @@ public class UsuarioController {
 
 
 
-    @DeleteMapping("/deletarUsuario")
-    public ResponseEntity<ResponseUsuarioDto> deletarUsuario(@RequestBody DeleteUsuarioDto deleteUsuarioDto){
-        usuarioService.deletarUsuario(deleteUsuarioDto.id());
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<ResponseUsuarioDto> deletarUsuario(@PathVariable UUID id){
+        usuarioService.deletarUsuario(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/atualizarUsuario")
+    @PutMapping("/atualizar")
     public ResponseEntity<ResponseUsuarioDto> atualizarUsuario(@RequestBody UpdateUsuarioDto updateUsuarioDto){
         UsuarioModel usuarioModel = usuarioService.atualizarUsuario(updateUsuarioDto);
 
@@ -56,7 +57,7 @@ public class UsuarioController {
     }
 
 
-    @GetMapping("/buscarUsuarios/{nome}")
+    @GetMapping("/buscar/{nome}")
     public ResponseEntity<ResponseUsuarioDto> buscarUsuarios(@PathVariable String nome){
         System.out.println("nome recebido: "+nome);
         UsuarioModel usuarioModel = usuarioService.findByNome(nome);
@@ -72,7 +73,7 @@ public class UsuarioController {
 
 
     //falta a parte dos exercicios
-    @GetMapping("/buscarUsuariosComTreinosExercicios/{nome}")
+    @GetMapping("/buscar/all/things/{nome}")
     public ResponseEntity<ResponseAllUsuarioDto> buscarUsuariosComTreino(@PathVariable String nome){
         System.out.println("nome recebido: "+nome);
         UsuarioModel usuarioModel = usuarioService.findByNome(nome);

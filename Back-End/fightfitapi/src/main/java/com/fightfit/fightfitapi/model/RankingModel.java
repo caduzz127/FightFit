@@ -27,7 +27,7 @@ public class RankingModel {
     private double carga;
 
     @ManyToOne()
-    @JoinColumn(name = "grupo_de_usuarios")
-    private GrupoUsuariosModel grupoUsuario;
+    @JoinColumn(name = "grupo")
+    private GrupoModel grupo;
 
 }

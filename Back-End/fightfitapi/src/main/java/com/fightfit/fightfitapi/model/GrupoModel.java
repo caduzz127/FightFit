@@ -25,10 +25,11 @@ public class GrupoModel {
     private String senha;
 
     @OneToMany(mappedBy = "grupo")
-    private List<GrupoUsuariosModel> usuario;
+    private List<GrupoUsuariosModel> usuarios;
 
 
-
+    @OneToMany(mappedBy = "grupo")
+    private List<RankingModel> ranking;
 
 
 }

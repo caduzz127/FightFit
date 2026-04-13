@@ -2,6 +2,7 @@ package com.fightfit.fightfitapi.service;
 
 import com.fightfit.fightfitapi.dto.grupo.CreateGrupoDto;
 import com.fightfit.fightfitapi.dto.grupo.JoinGrupoDto;
+import com.fightfit.fightfitapi.dto.grupo.UsuarioGrupoDto;
 import com.fightfit.fightfitapi.model.GrupoModel;
 import com.fightfit.fightfitapi.model.GrupoUsuariosModel;
 import com.fightfit.fightfitapi.model.UsuarioModel;
@@ -11,6 +12,9 @@ import com.fightfit.fightfitapi.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -44,28 +48,36 @@ public class GrupoService {
                     .cargo("Administrador")
                     .build();
             grupoUsuariosRepository.save(grupoUsuariosModel);
+
+            grupoCriado.setUsuarios(grupoUsuariosRepository.findByIdGrupo(grupoCriado.getId()));
+
             return grupoCriado;
+
         }
 
     }
 
-//    public GrupoModel entrarNoGrupo(JoinGrupoDto joinGrupoDto){
-//        if(!grupoRepository.findByName(joinGrupoDto.nome()).isPresent()){
-//            throw new RuntimeException("Grupo não foi encontrado");
-//        }else{
-//            GrupoModel grupoModel = grupoRepository.findByNameAndSenha(joinGrupoDto.nome(), joinGrupoDto.senha()).orElseThrow(() -> new RuntimeException("Nome ou senha Errados"));
-//            UsuarioModel usuarioModel = usuarioRepository.findById(joinGrupoDto.id_usuario()).orElseThrow(()-> new RuntimeException("Usuario encontrado"));
-//
-//            GrupoModel grupoNovoUsuario = GrupoModel.builder()
-//                    .nome(grupoModel.getNome())
-//                    .senha(usuarioModel.getSenha())
-//                    .usuario(usuarioModel)
-//                    .build();
-//
-//            return grupoRepository.save();
-//        }
-//
-//    }
+    public GrupoModel entrarGrupo(JoinGrupoDto joinGrupoDto){
+        if(!grupoRepository.findByName(joinGrupoDto.nomeGrupo()).isPresent()){
+            throw new RuntimeException("Grupo não foi encontrado");
+        }else{
+            GrupoModel grupoModel = grupoRepository.findByNameAndSenha(joinGrupoDto.nomeGrupo(), joinGrupoDto.senhaGrupo()).orElseThrow(() -> new RuntimeException("Nome ou senha Errados"));
+            UsuarioModel usuarioModel = usuarioRepository.findById(joinGrupoDto.id_usuario()).orElseThrow(()-> new RuntimeException("Usuario encontrado"));
+
+            GrupoUsuariosModel grupoUsuariosModel = GrupoUsuariosModel.builder()
+                    .grupo(grupoModel)
+                    .usuario(usuarioModel)
+                    .cargo("user")
+                    .build();
+
+            grupoUsuariosRepository.save(grupoUsuariosModel);
+
+            grupoModel.setUsuarios(grupoUsuariosRepository.findByIdGrupo(grupoModel.getId()));
+
+            return grupoModel;
+        }
+
+    }
 
 
 //    public void excluirGrupoPorNome(String nome){

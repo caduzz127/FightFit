@@ -25,7 +25,7 @@ public class ExercicioController {
     private ExercicioService exercicioService;
 
 
-    @PostMapping("/cadastrarExercicios")
+    @PostMapping("/cadastrar")
     public ResponseEntity<ResponseExercicioDto> salvarExercicio(@RequestBody CreateExercicioDto  createExercicioDto){
         ExercicioModel exercicioModel = exercicioService.salvarExercicio(createExercicioDto);
         ResponseExercicioDto responseExercicioDto = new ResponseExercicioDto(
@@ -40,7 +40,7 @@ public class ExercicioController {
     }
 
 
-    @PutMapping("/atualizarExercicios")
+    @PutMapping("/atualizar")
     public ResponseEntity<ResponseExercicioDto>  atualizarTreinos(@RequestBody UpdateExercicioDto  updateExercicioDto){
         ExercicioModel exercicio = exercicioService.atualizarExercicio(updateExercicioDto);
 
@@ -55,7 +55,7 @@ public class ExercicioController {
         return ResponseEntity.ok().body(responseExercicioDto);
     }
 
-    @GetMapping("/buscarExercicios/{nome}")
+    @GetMapping("/buscar/{nome}")
     public ResponseEntity<ResponseAllExerciciosDto> buscarExercicio(@PathVariable String nome){
 
         List<ExercicioModel> listaDeExercicios = exercicioService.buscarExercicioPorNome(nome);
@@ -80,7 +80,7 @@ public class ExercicioController {
     }
 
 
-    @DeleteMapping("/deletarExercicios/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<ResponseAllExerciciosDto> deletarExercicio(@PathVariable UUID id){
         exercicioService.deleteExercicio(id);
 

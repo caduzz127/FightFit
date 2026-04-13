@@ -19,7 +19,7 @@ public class TreinoController {
     @Autowired
     TreinoService treinoService;
 
-    @PostMapping("/cadastrarTreino")
+    @PostMapping("/cadastrar")
     public ResponseEntity<ResponseTreinoDto> salvarTreino(@RequestBody CreateTreinoDto createTreinoDto){
         TreinoModel treinoModel = treinoService.salvarTreino(createTreinoDto);
 
@@ -32,7 +32,7 @@ public class TreinoController {
     }
 
 
-    @PutMapping("/atualizarTreino")
+    @PutMapping("/atualizar")
     public ResponseEntity<ResponseTreinoDto> atualizarTreino(@RequestBody UpdateTreinoDto updateTreinoDto){
         TreinoModel treinoModel = treinoService.atualizarTreino(updateTreinoDto);
         ResponseTreinoDto responseTreinoDto = new ResponseTreinoDto(
@@ -44,13 +44,13 @@ public class TreinoController {
     }
 
 
-    @DeleteMapping("/deletarTreino/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<ResponseTreinoDto> deletarTreino(@PathVariable("id") UUID idTreino){
         treinoService.deletarTreino(idTreino);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/buscarTreinosPorNome/{nome}")
+    @GetMapping("/buscar/por/nome/{nome}")
     public ResponseEntity<ResponseTreinoByNomeDto> buscarTreinosPorNome(@PathVariable("nome") String nome){
         List<TreinoModel> treinoModels = treinoService.buscarTreinoPorNome(nome);
         List<ResponseTreinoDto> responseTreinoDtos = new ArrayList<>();
