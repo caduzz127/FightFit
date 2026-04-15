@@ -31,4 +31,8 @@ public class UsuarioModel {
 
     @OneToMany(mappedBy = "usuario")
     private List<GrupoUsuariosModel> grupos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<RankingUsuarioModel> rankings;
+
 }
