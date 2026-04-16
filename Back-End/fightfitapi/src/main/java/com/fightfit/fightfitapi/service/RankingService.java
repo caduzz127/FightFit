@@ -2,13 +2,12 @@ package com.fightfit.fightfitapi.service;
 
 import com.fightfit.fightfitapi.dto.ranking.CreateRankingDto;
 import com.fightfit.fightfitapi.model.*;
-import com.fightfit.fightfitapi.repository.GrupoRepository;
-import com.fightfit.fightfitapi.repository.GrupoUsuariosRepository;
-import com.fightfit.fightfitapi.repository.RankingRepository;
-import com.fightfit.fightfitapi.repository.UsuarioRepository;
+import com.fightfit.fightfitapi.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -26,6 +25,9 @@ public class RankingService {
     @Autowired
     private GrupoRepository grupoRepository;
 
+    @Autowired
+    private RankingUsuarioRepository rankingUsuarioRepository;
+
     public RankingModel createRanking(CreateRankingDto CreateRanking) {
         if(!usuarioRepository.findById(CreateRanking.idUsuario()).isPresent() || !grupoRepository.findById(CreateRanking.idGrupo()).isPresent()) {
             throw new RuntimeException("Grupo ou Usuario não encotrado");
@@ -40,8 +42,7 @@ public class RankingService {
 
 
                 RankingModel rankingModel = RankingModel.builder()
-                        .carga(CreateRanking.cargaRanking())
-                        .nomeDoRanking(CreateRanking.nomeDoRanking())
+                        .nomeDoRanking(CreateRanking.nome())
                         .grupo(grupoModel)
                         .build();
 
@@ -50,8 +51,13 @@ public class RankingService {
 
                 RankingUsuarioModel rankingUsuarioModel = RankingUsuarioModel.builder()
                         .usuario(usuarioModel)
+                        .carga(CreateRanking.carga())
                         .ranking(rankingCriado)
                         .build();
+
+                rankingUsuarioRepository.save(rankingUsuarioModel);
+                List<RankingUsuarioModel> newRankingUsuarioModel =  rankingUsuarioRepository.findAllByRanking(rankingCriado.getId());
+               rankingCriado.setUsuarios(newRankingUsuarioModel);
                 return rankingCriado;
             }
 

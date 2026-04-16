@@ -22,8 +22,7 @@ public class RankingModel {
     @Column(name = "nome_do_ranking")
     private String nomeDoRanking;
 
-    @Column(name = "carga_ranking")
-    private double carga;
+
 
     @ManyToOne()
     @JoinColumn(name = "grupo")

@@ -23,4 +23,7 @@ public class RankingUsuarioModel {
     @ManyToOne()
     @JoinColumn(name = "ranking")
     private RankingModel ranking;
+
+    @Column(name = "carga_ranking")
+    private double carga;
 }
