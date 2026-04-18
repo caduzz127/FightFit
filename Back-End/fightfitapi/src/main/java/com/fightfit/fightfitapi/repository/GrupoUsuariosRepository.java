@@ -14,7 +14,7 @@ public interface GrupoUsuariosRepository extends JpaRepository<GrupoUsuariosMode
     @Query(value = "Select * from tb_grupo_usuarios where id_grupo = :id ", nativeQuery  = true )
     public List<GrupoUsuariosModel>  findByIdGrupo(@Param("id") UUID id);
 
-    @Query(value = "Select * from tb_grupo_usuarios where id_usuario = :id ", nativeQuery = true)
-    public Optional<GrupoUsuariosModel> findByUsuario(@Param("id") UUID id);
+    @Query(value = "select * from tb_grupo_usuarios where id_usuario = :id and id_grupo = :id_grupo", nativeQuery = true)
+    public Optional<GrupoUsuariosModel> findByUsuario(@Param("id") UUID idUsuario,  @Param("id_grupo") UUID id_grupo);
 
 }

@@ -28,13 +28,13 @@ public class RankingService {
     @Autowired
     private RankingUsuarioRepository rankingUsuarioRepository;
 
-    public RankingModel createRanking(CreateRankingDto CreateRanking) {
-        if(!usuarioRepository.findById(CreateRanking.idUsuario()).isPresent() || !grupoRepository.findById(CreateRanking.idGrupo()).isPresent()) {
+    public RankingModel createRanking(CreateRankingDto createRanking) {
+        if(!usuarioRepository.findById(createRanking.idUsuario()).isPresent() || !grupoRepository.findById(createRanking.idGrupo()).isPresent()) {
             throw new RuntimeException("Grupo ou Usuario não encotrado");
         }else{
-            GrupoUsuariosModel grupoUsuariosModel= grupoUsuariosRepository.findByUsuario(CreateRanking.idUsuario()).orElseThrow(()-> new RuntimeException("Usuario nao encontrado"));
-            UsuarioModel usuarioModel =  usuarioRepository.findById(CreateRanking.idUsuario()).orElseThrow(()-> new RuntimeException("Usuario nao encontrado"));
-            GrupoModel grupoModel = grupoRepository.findById(CreateRanking.idGrupo()).orElseThrow(()-> new RuntimeException("Grupo nao encontrado"));
+            GrupoUsuariosModel grupoUsuariosModel= grupoUsuariosRepository.findByUsuario(createRanking.idUsuario(), createRanking.idGrupo()).orElseThrow(()-> new RuntimeException("Usuario nao encontrado"));
+            UsuarioModel usuarioModel =  usuarioRepository.findById(createRanking.idUsuario()).orElseThrow(()-> new RuntimeException("Usuario nao encontrado"));
+            GrupoModel grupoModel = grupoRepository.findById(createRanking.idGrupo()).orElseThrow(()-> new RuntimeException("Grupo nao encontrado"));
 
             if (!grupoUsuariosModel.getCargo().equals("Administrador")) {
                 throw new RuntimeException("O Usuario não é um administrador para poder criar um grupo");
@@ -42,7 +42,7 @@ public class RankingService {
 
 
                 RankingModel rankingModel = RankingModel.builder()
-                        .nomeDoRanking(CreateRanking.nome())
+                        .nomeDoRanking(createRanking.nome())
                         .grupo(grupoModel)
                         .build();
 
@@ -51,17 +51,18 @@ public class RankingService {
 
                 RankingUsuarioModel rankingUsuarioModel = RankingUsuarioModel.builder()
                         .usuario(usuarioModel)
-                        .carga(CreateRanking.carga())
+                        .carga(createRanking.carga())
                         .ranking(rankingCriado)
                         .build();
 
                 rankingUsuarioRepository.save(rankingUsuarioModel);
                 List<RankingUsuarioModel> newRankingUsuarioModel =  rankingUsuarioRepository.findAllByRanking(rankingCriado.getId());
-               rankingCriado.setUsuarios(newRankingUsuarioModel);
+                rankingCriado.setUsuarios(newRankingUsuarioModel);
                 return rankingCriado;
             }
 
         }
 
     }
+
 }

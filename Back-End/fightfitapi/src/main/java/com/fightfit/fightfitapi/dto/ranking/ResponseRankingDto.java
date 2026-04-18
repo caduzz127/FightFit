@@ -9,5 +9,5 @@ import com.fightfit.fightfitapi.repository.RankingUsuarioRepository;
 import java.util.List;
 import java.util.UUID;
 
-public record ResponseRankingDto(UUID id, String nome, ResponseGrupoDto grupo, List<ResponseUsuarioInRankingDto> usuarios) {
+public record ResponseRankingDto(UUID id, String nome_do_ranking, ResponseGrupoDto grupo, List<ResponseUsuarioInRankingDto> usuarios_do_ranking) {
 }
